@@ -1,37 +1,36 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1677c8"><meta name="description" content="AI'ceeTech Mobile — a phone-first Aero desktop environment">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1677c8"><meta name="description" content="Cee'tech Mobile — Your desktop. Your experience.">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
-<title>AI'ceeTech Mobile V1</title><link rel="stylesheet" href="style.css">
+<title>Cee'tech Mobile V1</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="boot" class="boot"><div class="boot-logo">AI'ceeTech</div><div>Starting your desktop…</div><div class="bootbar"><i></i></div><button id="startNow">Start now</button></div>
+<div id="boot" class="boot">
+  <div class="boot-glow"></div><div class="boot-logo">Cee'tech</div><div class="boot-tagline">Your desktop. Your experience.</div>
+  <div class="feature-strip"><div class="feature side"><b>⌨️ Full Keyboard & Mouse</b><small>PC-style controls</small></div><div class="feature main"><b>▣ Multi / Floating Windows</b><small>Move · Resize · Multitask</small></div><div class="feature side"><b>◉ Eye Care + Privacy Shield</b><small>Comfort and focus</small></div></div>
+  <div class="bootbar"><i></i></div><div class="boot-loading">Loading your desktop...</div><div class="boot-footer"><span class="flag">🇵🇭</span><span>Cee'tech Mobile v1.0</span><small>Jshamcspc Build</small></div>
+  <button id="startNow">Start now</button>
+</div>
 <div id="desktop" class="desktop hidden">
-  <div class="wallpaper-glow"></div>
-  <header class="topline"><span>AI'ceeTech Mobile</span><span id="topClock"></span></header>
+  <div class="wallpaper-glow"></div><header class="topline"><span>Cee'tech Mobile</span><span id="topClock"></span></header>
   <main id="icons" class="desktop-icons">
-    <button class="deskicon" data-app="notes"><span>📝</span>Notes</button>
-    <button class="deskicon" data-app="calculator"><span>🧮</span>Calculator</button>
-    <button class="deskicon" data-app="paint"><span>🎨</span>Paint</button>
-    <button class="deskicon" data-app="files"><span>📁</span>File Manager</button>
-    <button class="deskicon" data-app="settings"><span>⚙️</span>Control Center</button>
-    <button class="deskicon" data-app="agent"><span>🤖</span>Owaa Tech</button>
-    <button class="deskicon" data-app="hub"><span>🧰</span>Microsoft Hub</button>
-    <button class="deskicon" data-app="media"><span>🎵</span>Media Player</button>
-    <button class="deskicon" data-app="taskmanager"><span>📊</span>Task Manager</button>
-    <button class="deskicon" data-app="notifications"><span>🔔</span>Notifications</button>
+    <button class="deskicon" data-app="notes"><span>📝</span>Notes</button><button class="deskicon" data-app="calculator"><span>🧮</span>Calculator</button><button class="deskicon" data-app="paint"><span>🎨</span>Paint</button><button class="deskicon" data-app="files"><span>📁</span>My Computer</button><button class="deskicon" data-app="settings"><span>⚙️</span>Control Center</button><button class="deskicon" data-app="agent"><span>🤖</span>Owaa Tech Agent</button><button class="deskicon" data-app="hub"><span>🧰</span>Microsoft Hub</button><button class="deskicon" data-app="media"><span>🎵</span>Media Player</button><button class="deskicon" data-app="task"><span>📊</span>Task Manager</button>
   </main>
-  <section id="widgets" class="widgets"><div class="widget clock-widget"><small>LOCAL TIME</small><strong id="widgetClock">--:--</strong><span id="widgetDate"></span></div><div class="widget calendar-widget"><div class="calendar-head"><button id="calendarPrev" aria-label="Previous month">‹</button><b id="calendarMonth">Calendar</b><button id="calendarNext" aria-label="Next month">›</button></div><div id="calendarGrid" class="calendar-grid"></div></div><div class="widget weather-widget"><b>Weather</b><span id="weatherStatus">Tap to check local weather</span><button id="weatherButton">Use device location</button></div><div class="widget note-widget"><b>Sticky Note</b><textarea id="stickyNote" placeholder="Write a quick note…"></textarea></div></section>
+  <section id="widgets" class="widgets">
+    <div class="widget" data-widget="clock"><header><b>Clock</b><button data-widget-hide="clock" title="Hide">×</button></header><strong id="widgetClock">--:--</strong><small id="widgetDate"></small></div>
+    <div class="widget" data-widget="calendar"><header><b>Calendar</b><button data-widget-hide="calendar" title="Hide">×</button></header><strong id="calendarDay">--</strong><small id="calendarMonth"></small></div>
+    <div class="widget" data-widget="weather"><header><b>Weather</b><button data-widget-hide="weather" title="Hide">×</button></header><strong id="weatherTemp">☀️</strong><small id="weatherStatus">Location weather is optional</small><button id="weatherButton" type="button">Update weather</button></div>
+    <div class="widget" data-widget="sticky"><header><b>Sticky Note</b><button data-widget-hide="sticky" title="Hide">×</button></header><textarea id="stickyNote" aria-label="Sticky Note" placeholder="Quick note…"></textarea></div>
+  </section>
   <section id="windows" aria-live="polite"></section>
-  <nav class="taskbar"><button id="startButton" class="start-button">✦ Start</button><div id="taskItems" class="task-items"></div><button id="quickSettings" class="tray">◉ Quick <span id="trayClock"></span></button></nav>
-  <section id="startMenu" class="start-menu hidden"><div class="start-head"><b>AI'ceeTech</b><input id="appSearch" placeholder="Search apps…"></div><div class="app-grid">
-    <button data-open="notes">📝 Notes</button><button data-open="calculator">🧮 Calculator</button><button data-open="paint">🎨 Paint</button><button data-open="files">📁 File Manager</button><button data-open="settings">⚙️ Control Center</button><button data-open="agent">🤖 Owaa Tech</button><button data-open="hub">🧰 Microsoft Hub</button><button data-open="media">🎵 Media Player</button><button data-open="taskmanager">📊 Task Manager</button><button data-open="notifications">🔔 Notifications</button>
-  </div><div class="start-foot">Aero desktop · AI'ceeTech Mobile V1</div></section>
-  <section id="quickPanel" class="quick-panel hidden"><div class="panel-head"><b>Quick Settings</b><button id="closeQuick">×</button></div><div class="quick-grid"><button id="quickTheme">🌗 Theme</button><button id="quickMotion">✨ Motion</button><button id="quickText">🔠 Large Text</button><button id="quickWallpaper">🎨 Wallpaper</button><button id="quickNotify">🔔 Notifications</button><button id="quickTask">📊 Task Manager</button></div><p class="muted" id="deviceInfo"></p></section>
-  <section id="desktopMenu" class="context-menu hidden"><button data-context="refresh">↻ Refresh</button><button data-context="arrange">▦ Arrange Icons</button><button data-context="widgets">◷ Toggle Widgets</button><button data-context="settings">⚙ Control Center</button></section>
+  <nav class="taskbar"><button id="startButton" class="start-button">✦ Start</button><div id="taskItems" class="task-items"></div><button id="quickSettings" class="tray">◉ <span id="trayClock"></span> ▴</button></nav>
+  <section id="startMenu" class="start-menu hidden"><div class="start-head"><b>Cee'tech</b><input id="appSearch" type="search" aria-label="Search installed apps" placeholder="Search apps…"></div><div class="start-columns"><div><div class="app-view-tools"><button id="listView" class="selected">☷ List</button><button id="gridView">▦ Grid</button></div><div id="appList" class="app-list"></div></div><aside class="start-side"><button data-open="settings">⚙️ Control Center</button><button data-open="files">📁 My Computer</button><button data-open="task">📊 Task Manager</button><button id="sleepButton">☾ Sleep</button></aside></div><div class="start-foot">Your desktop. Your experience.</div></section>
+  <section id="quickPanel" class="quick-panel hidden"><div class="panel-head"><b>Control Center</b><button id="panelClose">×</button></div><div class="quick-grid"><button data-setting="wifi">◉ Wi-Fi<br><small>Android settings</small></button><button data-setting="bluetooth">ᛒ Bluetooth<br><small>Android settings</small></button><button data-setting="eye">☼ Eye Care</button><button data-setting="privacy">◐ Privacy Shield</button><button data-setting="dim">◑ Extra Dim</button><button data-open="settings">⚙️ All settings</button></div><div class="panel-clock" id="panelDate"></div></section>
   <section id="toast" class="toast hidden"></section>
+  <div id="contextMenu" class="context-menu hidden"><button data-context="refresh">↻ Refresh desktop</button><button data-context="settings">⚙️ Personalize</button><button data-context="task">▣ Task View</button></div>
+  <div id="privacyOverlay" class="privacy-overlay hidden"></div><div id="dimOverlay" class="dim-overlay hidden"></div><div id="eyeOverlay" class="eye-overlay hidden"></div>
 </div>
 <script src="app.js"></script>
 </body></html>

@@ -1,7 +1,9 @@
 {
-  "name": "AI'ceeTech Mobile",
-  "short_name": "AI'ceeTech",
+  "name": "Cee'tech Mobile V1",
+  "short_name": "Cee'tech",
+  "description": "Your desktop. Your experience.",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#07182c",
   "theme_color": "#1677c8",
