@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1677c8"><meta name="description" content="AI'ceeTech Mobile — a phone-first desktop environment">
+<meta name="theme-color" content="#1677c8"><meta name="description" content="AI'ceeTech Mobile — a phone-first Aero desktop environment">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
 <title>AI'ceeTech Mobile V1</title><link rel="stylesheet" href="style.css">
 </head>
@@ -12,26 +12,25 @@
   <div class="wallpaper-glow"></div>
   <header class="topline"><span>AI'ceeTech Mobile</span><span id="topClock"></span></header>
   <main id="icons" class="desktop-icons">
-    <button class="deskicon" data-app="browser"><span>🌐</span>Browser</button>
     <button class="deskicon" data-app="notes"><span>📝</span>Notes</button>
     <button class="deskicon" data-app="calculator"><span>🧮</span>Calculator</button>
     <button class="deskicon" data-app="paint"><span>🎨</span>Paint</button>
     <button class="deskicon" data-app="files"><span>📁</span>File Manager</button>
-    <button class="deskicon" data-app="settings"><span>⚙️</span>Settings</button>
+    <button class="deskicon" data-app="settings"><span>⚙️</span>Control Center</button>
     <button class="deskicon" data-app="agent"><span>🤖</span>Owaa Tech</button>
     <button class="deskicon" data-app="hub"><span>🧰</span>Microsoft Hub</button>
-    <button class="deskicon" data-app="control"><span>🎛️</span>Control Center</button>
+    <button class="deskicon" data-app="media"><span>🎵</span>Media Player</button>
+    <button class="deskicon" data-app="taskmanager"><span>📊</span>Task Manager</button>
+    <button class="deskicon" data-app="notifications"><span>🔔</span>Notifications</button>
   </main>
+  <section id="widgets" class="widgets"><div class="widget clock-widget"><small>LOCAL TIME</small><strong id="widgetClock">--:--</strong><span id="widgetDate"></span></div><div class="widget note-widget"><b>Sticky Note</b><textarea id="stickyNote" placeholder="Write a quick note…"></textarea></div></section>
   <section id="windows" aria-live="polite"></section>
-  <nav class="taskbar"><button id="startButton" class="start-button">✦ Start</button><div id="taskItems" class="task-items"></div><button id="quickSettings" class="tray">◉ <span id="trayClock"></span></button></nav>
-  <section id="startMenu" class="start-menu hidden">
-    <div class="start-head"><b>AI'ceeTech</b><input id="appSearch" placeholder="Search apps…"></div>
-    <div class="app-grid">
-      <button data-open="browser">🌐 Browser</button><button data-open="notes">📝 Notes</button><button data-open="calculator">🧮 Calculator</button><button data-open="paint">🎨 Paint</button><button data-open="files">📁 File Manager</button><button data-open="settings">⚙️ Settings</button><button data-open="agent">🤖 Owaa Tech</button><button data-open="hub">🧰 Microsoft Hub</button><button data-open="control">🎛️ Control Center</button>
-    </div>
-    <div class="start-foot">Phone-first desktop · V1</div>
-  </section>
-  <section id="desktopMenu" class="desktop-menu hidden"><button data-action="refresh">↻ Refresh</button><button data-action="arrange">▦ Arrange icons</button><button data-action="control">🎛️ Control Center</button></section>
+  <nav class="taskbar"><button id="startButton" class="start-button">✦ Start</button><div id="taskItems" class="task-items"></div><button id="quickSettings" class="tray">◉ Quick <span id="trayClock"></span></button></nav>
+  <section id="startMenu" class="start-menu hidden"><div class="start-head"><b>AI'ceeTech</b><input id="appSearch" placeholder="Search apps…"></div><div class="app-grid">
+    <button data-open="notes">📝 Notes</button><button data-open="calculator">🧮 Calculator</button><button data-open="paint">🎨 Paint</button><button data-open="files">📁 File Manager</button><button data-open="settings">⚙️ Control Center</button><button data-open="agent">🤖 Owaa Tech</button><button data-open="hub">🧰 Microsoft Hub</button><button data-open="media">🎵 Media Player</button><button data-open="taskmanager">📊 Task Manager</button><button data-open="notifications">🔔 Notifications</button>
+  </div><div class="start-foot">Aero desktop · AI'ceeTech Mobile V1</div></section>
+  <section id="quickPanel" class="quick-panel hidden"><div class="panel-head"><b>Quick Settings</b><button id="closeQuick">×</button></div><div class="quick-grid"><button id="quickTheme">🌗 Theme</button><button id="quickMotion">✨ Motion</button><button id="quickText">🔠 Large Text</button><button id="quickWallpaper">🎨 Wallpaper</button><button id="quickNotify">🔔 Notifications</button><button id="quickTask">📊 Task Manager</button></div><p class="muted" id="deviceInfo"></p></section>
+  <section id="desktopMenu" class="context-menu hidden"><button data-context="refresh">↻ Refresh</button><button data-context="arrange">▦ Arrange Icons</button><button data-context="widgets">◷ Toggle Widgets</button><button data-context="settings">⚙ Control Center</button></section>
   <section id="toast" class="toast hidden"></section>
 </div>
 <script src="app.js"></script>
