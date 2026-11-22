@@ -13,15 +13,13 @@ body.dark .desktop{background:linear-gradient(135deg,#090b13,#25263c 55%,#111827
 #paintCanvas{width:100%;height:260px;background:#fff;border-radius:8px;touch-action:none}.agent-card{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px}.agent-face{font-size:48px}.calc-display{width:100%;font-size:25px;text-align:right;padding:12px;background:#0003;border:1px solid var(--line);border-radius:8px;color:inherit;margin-bottom:9px}.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.calc-grid button{padding:15px 5px;border:1px solid var(--line);background:#ffffff15;border-radius:8px}
 @media(min-width:650px){.desktop-icons{grid-template-columns:repeat(1,82px);grid-auto-rows:84px}.window{left:52%;top:47%}}
 
-/* Control Center */
-.control-group{padding:12px;margin:10px 0;border:1px solid var(--line);border-radius:9px;background:#ffffff0b}
-.control-group>b{display:block;margin-bottom:10px}
-.control-toggle{display:flex;align-items:center;gap:10px;padding:9px 2px}
-.control-toggle input{width:18px;height:18px;accent-color:var(--accent)}
-.device-info{display:grid;gap:8px}
-.device-info>div{display:flex;justify-content:space-between;gap:12px;padding:8px;border-radius:7px;background:#ffffff0d}
-.device-info span{opacity:.72}
-.device-info strong{text-align:right;overflow-wrap:anywhere}
-body.large-text{font-size:17px}
-body.large-text .deskicon,body.large-text .taskbar,body.large-text .window{font-size:1.08em}
-body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+/* AI'ceeTech desktop upgrade */
+.desktop-icons{display:block;padding:0;width:100%;height:calc(100% - 90px);pointer-events:none}
+.deskicon{position:absolute;width:78px;height:84px;pointer-events:auto;touch-action:none;user-select:none}
+.desktop-menu{position:absolute;z-index:800;min-width:178px;padding:6px;border:1px solid var(--line);border-radius:10px;background:var(--panel);backdrop-filter:blur(20px);box-shadow:0 10px 30px #0008;display:grid;gap:4px}
+.desktop-menu button{padding:10px;text-align:left;border:0;border-radius:6px;background:#ffffff10}
+.desktop-menu button:active{background:#55baff44}
+.setting-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:8px;margin:7px 0}
+.setting-row input{width:auto}
+body.large-text{font-size:17px}body.large-text .deskicon{font-size:13px}body.reduce-motion *,body.reduce-motion *:before,body.reduce-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.task-item{max-width:38vw;overflow:hidden;text-overflow:ellipsis}

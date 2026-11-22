@@ -23,7 +23,7 @@
     <button class="deskicon" data-app="control"><span>🎛️</span>Control Center</button>
   </main>
   <section id="windows" aria-live="polite"></section>
-  <nav class="taskbar"><button id="startButton" class="start-button">✦ Start</button><div id="taskItems" class="task-items"></div><button id="quickSettings" class="tray">⚙️ <span id="trayClock"></span></button></nav>
+  <nav class="taskbar"><button id="startButton" class="start-button">✦ Start</button><div id="taskItems" class="task-items"></div><button id="quickSettings" class="tray">◉ <span id="trayClock"></span></button></nav>
   <section id="startMenu" class="start-menu hidden">
     <div class="start-head"><b>AI'ceeTech</b><input id="appSearch" placeholder="Search apps…"></div>
     <div class="app-grid">
@@ -31,6 +31,7 @@
     </div>
     <div class="start-foot">Phone-first desktop · V1</div>
   </section>
+  <section id="desktopMenu" class="desktop-menu hidden"><button data-action="refresh">↻ Refresh</button><button data-action="arrange">▦ Arrange icons</button><button data-action="control">🎛️ Control Center</button></section>
   <section id="toast" class="toast hidden"></section>
 </div>
 <script src="app.js"></script>
