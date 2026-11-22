@@ -1,6 +1,8 @@
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const desktop=$("#desktop"),boot=$("#boot"),windows=$("#windows"),menu=$("#startMenu"),tasks=$("#taskItems");
 let z=30,seq=0,openWindows=new Map(),theme=localStorage.getItem("aicee-theme")||"blue";
+if(localStorage.getItem("aicee-large-text")==="on")document.body.classList.add("large-text");
+if(localStorage.getItem("aicee-reduce-motion")==="on")document.body.classList.add("reduce-motion");
 if(theme==="dark")document.body.classList.add("dark");
 function clock(){let d=new Date(),s=d.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});$("#topClock").textContent=s;$("#trayClock").textContent=s}
 setInterval(clock,1000);clock();
@@ -8,12 +10,12 @@ function toast(t){let e=$("#toast");e.textContent=t;e.classList.remove("hidden")
 function showDesktop(){boot.classList.add("hidden");desktop.classList.remove("hidden")}
 $("#startNow").onclick=showDesktop;setTimeout(showDesktop,900);
 $("#startButton").onclick=()=>menu.classList.toggle("hidden");
-$("#quickSettings").onclick=()=>launch("settings");
+$("#quickSettings").onclick=()=>launch("control");
 $$("[data-app]").forEach(b=>b.onclick=()=>launch(b.dataset.app));
 $$("[data-open]").forEach(b=>b.onclick=()=>{menu.classList.add("hidden");launch(b.dataset.open)});
 function launch(app){
  if(openWindows.has(app)){let w=openWindows.get(app);w.classList.remove("minimized");w.style.display="flex";focus(w);return}
- let titles={browser:"Web Browser",notes:"Notes",calculator:"Calculator",paint:"Paint",files:"File Manager",settings:"Settings",agent:"Owaa Tech Agent",hub:"Microsoft Hub"};
+ let titles={browser:"Web Browser",notes:"Notes",calculator:"Calculator",paint:"Paint",files:"File Manager",settings:"Settings",agent:"Owaa Tech Agent",hub:"Microsoft Hub",control:"Control Center"};
  let w=document.createElement("section");w.className="window active";w.dataset.app=app;w.style.zIndex=++z;
  w.innerHTML=`<div class="titlebar"><strong>${titles[app]||app}</strong><div class="win-controls"><button data-min title="Minimize">−</button><button data-max title="Maximize">□</button><button data-close title="Close">×</button></div></div><div class="win-body">${content(app)}</div>`;
  windows.append(w);openWindows.set(app,w);
@@ -26,6 +28,17 @@ function launch(app){
 function focus(w){$$(".window").forEach(x=>x.classList.remove("active"));w.classList.add("active");w.style.zIndex=++z}
 function drag(w){let bar=w.querySelector(".titlebar"),sx,sy,ox,oy,dragging=false;bar.addEventListener("pointerdown",e=>{if(e.target.closest("button")||w.classList.contains("maximized"))return;dragging=true;focus(w);sx=e.clientX;sy=e.clientY;let r=w.getBoundingClientRect();ox=r.left;oy=r.top;bar.setPointerCapture(e.pointerId)});bar.addEventListener("pointermove",e=>{if(!dragging)return;w.style.left=Math.max(0,Math.min(innerWidth-w.offsetWidth,ox+e.clientX-sx))+"px";w.style.top=Math.max(30,Math.min(innerHeight-90,oy+e.clientY-sy))+"px";w.style.transform="none"});bar.addEventListener("pointerup",()=>dragging=false)}
 function content(a){
+ if(a==="control")return `<h3>Control Center</h3>
+ <p class="muted">Quick controls for your AI'ceeTech desktop.</p>
+ <div class="control-group"><b>Appearance</b><div class="toolbar"><button id="controlBlue">Aero Blue</button><button id="controlDark">Aero Dark</button></div></div>
+ <div class="control-group"><b>Accessibility</b>
+ <label class="control-toggle"><input type="checkbox" id="largeTextToggle"> Large text</label>
+ <label class="control-toggle"><input type="checkbox" id="reduceMotionToggle"> Reduce motion</label></div>
+ <div class="control-group"><b>Device information</b><div class="device-info">
+ <div><span>Platform</span><strong id="devicePlatform">Checking…</strong></div>
+ <div><span>Screen</span><strong id="deviceScreen">Checking…</strong></div>
+ <div><span>Connection</span><strong id="deviceNetwork">Checking…</strong></div>
+ </div></div>`;
  if(a==="browser")return `<div class="toolbar browserbar"><input id="url" placeholder="Search Google or enter website address"><button id="go">Go</button></div><div class="toolbar"><button id="google">Google</button><button id="external">Open in Chrome</button><button id="back">←</button><button id="refresh">↻</button></div><div id="webresult" class="file-row"><b>Welcome to AI'ceeTech Browser</b><p class="muted">Search the web or enter a website. Some sites block embedded browsers; use Open in Chrome when needed.</p><a href="https://www.google.com" target="_blank" rel="noopener">Open Google Search</a></div><iframe id="webframe" title="Web content" style="display:none;width:100%;height:65%;border:1px solid #ffffff33;border-radius:8px;background:white" sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>`;
  if(a==="notes")return `<p class="muted">Notes are saved locally on this phone/browser.</p><textarea id="noteText" placeholder="Write your notes here…"></textarea><div class="toolbar"><button id="saveNote">Save note</button><button id="downloadNote">Export .txt</button></div><div id="noteStatus" class="muted"></div>`;
  if(a==="calculator")return `<input class="calc-display" id="calcDisplay" readonly value="0"><div class="calc-grid">${["7","8","9","÷","4","5","6","×","1","2","3","−","0",".","C","+","(",")","⌫","="].map(x=>`<button data-key="${x}">${x}</button>`).join("")}</div>`;
@@ -40,6 +53,20 @@ function wire(a,w){const q=s=>w.querySelector(s);
  if(a==="notes"){q("#noteText").value=localStorage.getItem("aicee-note")||"";q("#saveNote").onclick=()=>{localStorage.setItem("aicee-note",q("#noteText").value);q("#noteStatus").textContent="Saved on this device.";};q("#downloadNote").onclick=()=>{let blob=new Blob([q("#noteText").value],{type:"text/plain"}),u=URL.createObjectURL(blob),l=document.createElement("a");l.href=u;l.download="aiceetech-note.txt";l.click();URL.revokeObjectURL(u)}}
  if(a==="calculator"){let d=q("#calcDisplay");q(".calc-grid").onclick=e=>{let k=e.target.dataset.key;if(!k)return;if(k==="C")d.value="0";else if(k==="⌫")d.value=d.value.slice(0,-1)||"0";else if(k==="="){try{let exp=d.value.replace(/÷/g,"/").replace(/×/g,"*").replace(/−/g,"-");if(!/^[0-9+\-*/(). ]+$/.test(exp))throw 0;d.value=String(Function('"use strict";return ('+exp+')')())}catch{d.value="Error"}}else d.value=d.value==="0"?k:d.value+k}}
  if(a==="paint"){let c=q("#paintCanvas"),ctx=c.getContext("2d"),down=false;ctx.lineWidth=7;ctx.lineCap="round";c.onpointerdown=e=>{down=true;let r=c.getBoundingClientRect();ctx.beginPath();ctx.moveTo((e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height);c.setPointerCapture(e.pointerId)};c.onpointermove=e=>{if(!down)return;let r=c.getBoundingClientRect();ctx.strokeStyle=q("#paintColor").value;ctx.lineTo((e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height);ctx.stroke()};c.onpointerup=()=>down=false;q("#clearPaint").onclick=()=>ctx.clearRect(0,0,c.width,c.height)}
+ if(a==="control"){
+   const large=q("#largeTextToggle"),motion=q("#reduceMotionToggle");
+   large.checked=document.body.classList.contains("large-text");
+   motion.checked=document.body.classList.contains("reduce-motion");
+   q("#controlBlue").onclick=()=>{document.body.classList.remove("dark");localStorage.setItem("aicee-theme","blue");toast("Aero Blue selected")};
+   q("#controlDark").onclick=()=>{document.body.classList.add("dark");localStorage.setItem("aicee-theme","dark");toast("Aero Dark selected")};
+   large.onchange=()=>{document.body.classList.toggle("large-text",large.checked);localStorage.setItem("aicee-large-text",large.checked?"on":"off")};
+   motion.onchange=()=>{document.body.classList.toggle("reduce-motion",motion.checked);localStorage.setItem("aicee-reduce-motion",motion.checked?"on":"off")};
+   const platform=navigator.userAgentData?.platform||navigator.platform||"Not available";
+   q("#devicePlatform").textContent=platform;
+   q("#deviceScreen").textContent=`${screen.width} × ${screen.height}`;
+   const updateNetwork=()=>q("#deviceNetwork").textContent=navigator.onLine?"Online":"Offline";
+   updateNetwork();window.addEventListener("online",updateNetwork);window.addEventListener("offline",updateNetwork);
+ }
  if(a==="settings"){q("#blueTheme").onclick=()=>{document.body.classList.remove("dark");localStorage.setItem("aicee-theme","blue")};q("#darkTheme").onclick=()=>{document.body.classList.add("dark");localStorage.setItem("aicee-theme","dark")};q("#installHelp").onclick=()=>toast("In Chrome: ⋮ menu → Add to Home screen")}
  if(a==="agent"){q("#skinOne").onclick=()=>q("#agentFace").textContent="🤖";q("#skinTwo").onclick=()=>q("#agentFace").textContent="🦾";q("#agentSend").onclick=()=>{let v=q("#agentInput").value.trim();q("#agentMessage").textContent=v?"I can help open apps. Try saying: open browser, notes, or calculator.":"Type a message first.";q("#agentInput").value=""};q("#agentInput").onkeydown=e=>{if(e.key==="Enter")q("#agentSend").click()}}
  if(a==="hub")q(".app-grid").onclick=e=>{let app=e.target.closest("[data-launch]")?.dataset.launch;if(app)launch(app)}

@@ -26,3 +26,9 @@ This is a web app, not an APK or a full Windows OS. It uses the Android browser 
 
 ## Data
 Notes are stored in the browser's local storage. Export important notes before clearing browser data or uninstalling the PWA. This V1 does not upload notes to a server.
+
+
+## Control Center update
+This package adds a Control Center shortcut on the desktop and Start menu. The taskbar quick-settings button opens it. It includes Aero Blue/Dark theme controls, saved Large Text and Reduce Motion preferences, and basic platform, screen, and online/offline status information.
+
+This is an incremental V1 update. Other planned features are not included yet. Test on Android before publishing to the live GitHub Pages site.
